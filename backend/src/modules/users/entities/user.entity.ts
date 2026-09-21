@@ -10,6 +10,10 @@ import { BookComment } from '../../books/entities/book_comment.entity.js';
 import { Poem } from '../../poems/entities/poem.entity.js';
 import { PoemLike } from '../../poems/entities/poem_like.entity.js';
 import { PoemComment } from '../../poems/entities/poem_comment.entity.js';
+import { Sentence } from '../../sentences/entities/sentence.entity.js';
+import { SentenceAgree } from '../../sentences/entities/sentence_agree.entity.js';
+import { SentenceLike } from '../../sentences/entities/sentence_like.entity.js';
+import { SentenceComment } from '../../sentences/entities/sentence_comment.entity.js';
 
 @Entity()
 export class User extends Base {
@@ -59,4 +63,16 @@ export class User extends Base {
 
     @OneToMany(() => PoemComment, (poemComment) => poemComment.user)
     poemComments!: PoemComment[];
+
+    @OneToMany(() => Sentence, (sentence) => sentence.user)
+    sentences!: Sentence[];
+
+    @OneToMany(() => SentenceAgree, (sentenceAgree) => sentenceAgree.sentence)
+    sentenceAgrees!: SentenceAgree[];
+
+    @OneToMany(() => SentenceLike, (sentenceLike) => sentenceLike.user)
+    sentenceLikes!: SentenceLike[];
+
+    @OneToMany(() => SentenceComment, (sentenceComment) => sentenceComment.user)
+    sentenceComments!: SentenceComment[];
 }
