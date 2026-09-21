@@ -14,6 +14,9 @@ import { Sentence } from '../../sentences/entities/sentence.entity.js';
 import { SentenceAgree } from '../../sentences/entities/sentence_agree.entity.js';
 import { SentenceLike } from '../../sentences/entities/sentence_like.entity.js';
 import { SentenceComment } from '../../sentences/entities/sentence_comment.entity.js';
+import { Post } from '../../posts/entities/post.entity.js';
+import { PostComment } from '../../posts/entities/post_comment.entity.js';
+import { PostLike } from '../../posts/entities/post_like.entity.js';
 
 @Entity()
 export class User extends Base {
@@ -75,4 +78,13 @@ export class User extends Base {
 
     @OneToMany(() => SentenceComment, (sentenceComment) => sentenceComment.user)
     sentenceComments!: SentenceComment[];
+
+    @OneToMany(() => Post, (post) => post.user)
+    posts!: Post[];
+
+    @OneToMany(() => PostLike, (postLike) => postLike.user)
+    postLikes!: PostLike[];
+
+    @OneToMany(() => PostComment, (postComment) => postComment.user)
+    postComments!: PostComment[];
 }
