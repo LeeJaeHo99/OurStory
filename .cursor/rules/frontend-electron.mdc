@@ -1,0 +1,27 @@
+---
+description: Electron 데스크톱 규칙 — main/preload/IPC, Zustand, Tailwind
+globs: "**/desktop/**/*.{ts,tsx},**/electron/**/*.{ts,tsx},**/src/main/**/*.ts,**/src/renderer/**/*.{ts,tsx},**/src/preload/**/*.ts"
+alwaysApply: false
+---
+
+# Electron
+
+상세: `.cursor/rules/frontend/desktop/*.md`
+
+## 프로세스
+
+- main / preload / renderer 분리. `nodeIntegration: false`, `contextIsolation: true`.
+- IPC는 `shared/ipc-channels` 상수 + `invoke`/`handle`. 렌더러에서 `require('electron')` 금지.
+- → `electron-project-structure.md`, `electron-ipc-communication.md`, `electron-native-features.md`
+
+## UI·상태
+
+- 컴포넌트 패턴은 Next와 동일 + WindowControls/DnD는 IPC.
+- Zustand만. UI persist = localStorage; 앱 데이터 = electron-store/IPC.
+- 스타일 = **Tailwind** (`-webkit-app-region` 드래그 주의).
+- → `electron-react-components.md`, `electron-state-management.md`, `electron-styling.md`, `electron-data-storage.md`
+
+## 빌드
+
+- electron-builder, 서명, updater.
+- → `electron-build-deployment.md`

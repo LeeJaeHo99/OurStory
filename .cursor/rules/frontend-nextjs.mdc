@@ -1,0 +1,28 @@
+---
+description: Next.js 웹 프론트 규칙 — App Router, Zustand, TanStack Query, Tailwind
+globs: "**/frontend/**/*.{ts,tsx},**/web/**/*.{ts,tsx},**/apps/web/**/*.{ts,tsx},**/src/app/**/*.{ts,tsx},**/src/components/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Next.js Frontend
+
+상세: `.cursor/rules/frontend/web/*.md`  
+(RN/Electron 전용 폴더는 해당 스택 룰 우선.)
+
+## 구조·컴포넌트
+
+- App Router, `services/*.api.ts` + `hooks/**/queries|mutations`.
+- Props `interface`, `.component.tsx`, 도메인 폴더.
+- → `nextjs-project-structure.md`, `nextjs-routing.md`, `nextjs-components.md`
+
+## 상태·데이터
+
+- **Zustand만** (Context로 앱 상태 금지).
+- 서버 상태 = **TanStack Query** (`staleTime`/`invalidateQueries`). API를 Zustand에 캐시하지 말 것.
+- 폼 = Zod + RHF + zodResolver.
+- → `nextjs-state-management.md`, `nextjs-data-fetching.md`, `nextjs-caching.md`, `nextjs-tanstack-query.md`, `nextjs-forms.md`, `nextjs-zustand-advanced.md`
+
+## UI
+
+- Tailwind / shadcn 패턴, Lucide 아이콘.
+- → `nextjs-shadcn-ui.md`, `nextjs-lucide-icons.md`, `nextjs-performance.md`
