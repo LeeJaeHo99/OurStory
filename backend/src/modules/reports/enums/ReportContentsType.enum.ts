@@ -1,0 +1,10 @@
+export enum ReportContentsType{
+    BOOK = 'BOOK',
+    POEM = 'POEM',
+    POST = 'POST',
+    SENTENCE = 'SENTENCE',
+    BOOK_COMMENT = 'BOOK_COMMENT',
+    POEM_COMMENT = 'POEM_COMMENT',
+    POST_COMMENT = 'POST_COMMENT',
+    SENTENCE_COMMENT = 'SENTENCE_COMMENT',
+}
