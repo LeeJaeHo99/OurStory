@@ -4,6 +4,7 @@ import { Genre } from "../enums/Genre.enum.js";
 import { User } from "../../users/entities/user.entity.js";
 import { PoemLike } from "./poem_like.entity.js";
 import { PoemComment } from "./poem_comment.entity.js";
+import { Sentence } from "../../sentences/entities/sentence.entity.js";
 
 @Entity()
 export class Poem extends Base{
@@ -25,4 +26,7 @@ export class Poem extends Base{
     
     @OneToMany(() => PoemComment, (poemComment) => poemComment.poem)
     poemComments!: PoemComment[];
+
+    @OneToMany(() => Sentence, (sentence) => sentence.poem)
+    sentences!: Sentence[];
 }
