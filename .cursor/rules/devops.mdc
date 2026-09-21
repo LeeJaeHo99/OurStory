@@ -1,0 +1,26 @@
+---
+description: DevOps — Docker(postgres:15, redis:7), GitHub Actions, Jest, E2E
+globs: "**/docker-compose*.{yml,yaml},**/Dockerfile*,**/.github/workflows/**/*.{yml,yaml},**/jest.config.*,**/playwright.config.*,**/e2e/**/*"
+alwaysApply: false
+---
+
+# DevOps
+
+상세: `.cursor/rules/devops/*.md`
+
+## Docker
+
+- 필수 이미지: `postgres:15`, `redis:7-alpine`.
+- 앱 healthcheck → `GET /ready`. Node 이미지 `node:22-alpine`.
+- → `devops-docker.md`, `backend/nestjs-health.md`
+
+## CI/CD
+
+- GitHub Actions만. Node 22, `npm ci`, lint → typecheck → test → build.
+- CI services도 동일 DB/Redis 태그. Secrets는 Environment.
+- → `devops-cicd.md`
+
+## 테스트
+
+- 유닛/통합 = Jest (+ RTL). E2E = Playwright(웹), Maestro/Detox(모바일, 스모크만).
+- → `devops-testing.md`, `devops-e2e.md`, `shared/eslint-prettier.md`

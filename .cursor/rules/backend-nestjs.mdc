@@ -1,0 +1,34 @@
+---
+description: NestJS 백엔드 규칙 — 컨트롤러, TypeORM, JWT, Redis, Swagger, 보안
+globs: "**/backend/**/*.{ts,js},**/src/modules/**/*.ts,**/src/**/*.entity.ts"
+alwaysApply: false
+---
+
+# NestJS Backend
+
+상세: `.cursor/rules/backend/*.md`
+
+## 구조·계층
+
+- `modules/[feature]/` — Controller는 라우팅만, 로직은 Service.
+- 커스텀 Repository 금지 → `@InjectRepository` + TypeORM `Repository`.
+- → `nestjs-project-structure.md`, `nestjs-controller.md`, `nestjs-service.md`, `nestjs-module-di.md`
+
+## 데이터·캐시
+
+- Postgres **15**, 인덱스 `@Index`, 스키마는 마이그레이션 (prod `synchronize` 금지).
+- Redis **7** + 캐시 키/TTL/무효화.
+- → `nestjs-database.md`, `nestjs-redis.md`, `nestjs-caching.md`, `nestjs-typeorm-advanced.md`
+
+## API·보안
+
+- 응답 `Result`, ValidationPipe whitelist, JWT + Guards.
+- Swagger `@Api*`, Helmet + CORS 화이트리스트 + Throttler.
+- `/health`(liveness) · `/ready`(DB/Redis), `@SkipThrottle` + `@Public`.
+- 업로드: multipart + MIME/크기, local|S3.
+- → `nestjs-swagger.md`, `nestjs-security.md`, `nestjs-health.md`, `nestjs-file-upload.md`, `nestjs-jwt-auth.md`, `nestjs-validation.md`, `nestjs-exception-filters.md`
+
+## Docker
+
+- `postgres:15`, `redis:7-alpine`. Compose 안에서는 `DB_HOST=postgres`, `REDIS_HOST=redis`.
+- → `../devops/devops-docker.md`

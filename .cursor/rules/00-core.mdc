@@ -1,0 +1,37 @@
+---
+description: 프로젝트 공통 코딩 규칙 (항상 적용). Result API, TS, env, lint.
+alwaysApply: true
+---
+
+# Core Standards
+
+상세 문서는 `.cursor/rules/` 아래 마크다운을 따른다. 충돌 시 **이 요약 + 해당 상세 문서** 우선.
+
+## 필수
+
+- API 응답: `Result<T>` → `{ isSuccess, data, message }` (204 금지).  
+  → `shared/api-response-format.md`, `shared/error-handling.md`
+- 환경변수: `.env.local`(로컬) / `.env`(배포), `ConfigService`/`getOrThrow`, gitignore.  
+  → `shared/environment-variables.md`
+- TypeScript·네이밍: `shared/typescript.md`, `shared/naming-conventions.md`
+- Lint/Format: ESLint + Prettier, CI에서 lint 필수.  
+  → `shared/eslint-prettier.md`
+- 모노레포: `backend/`(Nest) + `frontend/`(Next|RN|Electron).  
+  → `shared/project-structure.md`
+
+## 스택 기본값
+
+| 영역 | 기본 |
+|------|------|
+| DB | PostgreSQL **15** (`postgres:15`) |
+| Cache | Redis **7** (`redis:7-alpine`) |
+| 상태(클라이언트) | **Zustand만** (Context로 앱 상태 금지) |
+| 서버 상태(FE) | TanStack Query (`useEffect` fetch 금지) |
+| 스타일(Web/Electron) | Tailwind |
+| 스타일(RN) | NativeWind |
+| CI | GitHub Actions, Node **22** |
+
+## 작업 시
+
+- 해당 스택 파일이면 매칭되는 Project Rule(`.mdc`)과 링크된 `.md`를 읽고 따를 것.
+- 새 패턴을 만들기 전에 기존 룰 문서를 확인할 것.

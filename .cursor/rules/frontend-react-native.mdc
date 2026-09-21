@@ -1,0 +1,27 @@
+---
+description: React Native (Expo) 규칙 — Navigation, Zustand, Query, NativeWind
+globs: "**/mobile/**/*.{ts,tsx},**/screens/**/*.{ts,tsx},**/*.screen.tsx,**/*.native.tsx"
+alwaysApply: false
+---
+
+# React Native (Expo)
+
+상세: `.cursor/rules/frontend/mobile/*.md`  
+Next 전용 `app/`(App Router)와 겹치면 **웹 룰**을 본다. Expo Router/`screens`면 이 룰.
+
+## 구조
+
+- Expo 기본, `.screen.tsx` / `.component.tsx`, React Navigation.
+- → `rn-project-structure.md`, `rn-navigation.md`, `rn-components.md`
+
+## 상태·데이터·스타일
+
+- Zustand만 + AsyncStorage persist.
+- 데이터 = `api()` + TanStack Query (웹과 동일 패턴). 캐시 → `frontend/web/nextjs-caching.md`.
+- 스타일 = **NativeWind** (StyleSheet는 보조).
+- → `rn-state-management.md`, `rn-data-fetching.md`, `rn-styling.md`
+
+## 네이티브·배포
+
+- Expo 모듈 + 권한, EAS Build.
+- → `rn-native-modules.md`, `rn-performance-deployment.md`
