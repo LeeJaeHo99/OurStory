@@ -4,6 +4,9 @@ import { Base } from '../../../common/entities/Base.entity.js';
 import { Role } from '../enums/Role.enum.js';
 import { Provider } from '../enums/Provider.enum.js';
 import { Badge } from '../enums/Badge.enum.js';
+import { Book } from '../../books/entities/book.entity.js';
+import { BookLike } from '../../books/entities/book_like.entity.js';
+import { BookComment } from '../../books/entities/book_comment.entity.js';
 
 @Entity()
 export class User extends Base {
@@ -35,4 +38,13 @@ export class User extends Base {
 
     @Column({ type: 'enum', enum: Badge, default: Badge.CHICK })
     badge!: Badge;
+
+    @OneToMany(() => Book, (book) => book.user)
+    books!: Book[];
+
+    @OneToMany(() => BookLike, (bookLike) => bookLike.user)
+    bookLikes!: BookLike[];
+
+    @OneToMany(() => BookComment, (bookComment) => bookComment.user)
+    bookComments!: BookComment[];
 }
