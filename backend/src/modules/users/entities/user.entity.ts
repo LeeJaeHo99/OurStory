@@ -7,6 +7,9 @@ import { Badge } from '../enums/Badge.enum.js';
 import { Book } from '../../books/entities/book.entity.js';
 import { BookLike } from '../../books/entities/book_like.entity.js';
 import { BookComment } from '../../books/entities/book_comment.entity.js';
+import { Poem } from '../../poems/entities/poem.entity.js';
+import { PoemLike } from '../../poems/entities/poem_like.entity.js';
+import { PoemComment } from '../../poems/entities/poem_comment.entity.js';
 
 @Entity()
 export class User extends Base {
@@ -47,4 +50,13 @@ export class User extends Base {
 
     @OneToMany(() => BookComment, (bookComment) => bookComment.user)
     bookComments!: BookComment[];
+
+    @OneToMany(() => Poem, (poem) => poem.user)
+    poems!: Poem[];
+
+    @OneToMany(() => PoemLike, (poemLike) => poemLike.user)
+    poemLikes!: PoemLike[];
+
+    @OneToMany(() => PoemComment, (poemComment) => poemComment.user)
+    poemComments!: PoemComment[];
 }
