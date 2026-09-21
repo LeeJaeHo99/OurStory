@@ -17,6 +17,7 @@ import { SentenceComment } from '../../sentences/entities/sentence_comment.entit
 import { Post } from '../../posts/entities/post.entity.js';
 import { PostComment } from '../../posts/entities/post_comment.entity.js';
 import { PostLike } from '../../posts/entities/post_like.entity.js';
+import { Notification } from '../../notifications/entities/notification.entity.js';
 
 @Entity()
 export class User extends Base {
@@ -87,4 +88,7 @@ export class User extends Base {
 
     @OneToMany(() => PostComment, (postComment) => postComment.user)
     postComments!: PostComment[];
+
+    @OneToMany(() => Notification, (notification) => notification.user)
+    notifications!: Notification[];
 }
