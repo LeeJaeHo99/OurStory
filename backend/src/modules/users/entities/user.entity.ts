@@ -18,6 +18,7 @@ import { Post } from '../../posts/entities/post.entity.js';
 import { PostComment } from '../../posts/entities/post_comment.entity.js';
 import { PostLike } from '../../posts/entities/post_like.entity.js';
 import { Notification } from '../../notifications/entities/notification.entity.js';
+import { Report } from '../../reports/entities/report.entity.js';
 
 @Entity()
 export class User extends Base {
@@ -91,4 +92,10 @@ export class User extends Base {
 
     @OneToMany(() => Notification, (notification) => notification.user)
     notifications!: Notification[];
+
+    @OneToMany(() => Report, (report) => report.reporter)
+    reporter!: Report[];
+
+    @OneToMany(() => Report, (report) => report.reportedUser)
+    reportedUser!: Report[];
 }
