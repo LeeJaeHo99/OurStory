@@ -1,23 +1,36 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
+import {
+    ArgumentsHost,
+    Catch,
+    ExceptionFilter,
+    HttpException,
+    HttpStatus,
+} from '@nestjs/common';
 import { Response } from 'express';
 
-@Catch(HttpException)
+@Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
-    catch(exception: HttpException, host: ArgumentsHost) {
-        const ctx = host.switchToHttp();
-        const res = ctx.getResponse<Response>();
-        const status = exception.getStatus();
-        const body = exception.getResponse();
+    catch(exception: unknown, host: ArgumentsHost) {
+        const res = host.switchToHttp().getResponse<Response>();
 
-        const message =
-            typeof body === 'string'
-                ? body
-                : (body as { message?: string | string[] }).message;
+        let status = HttpStatus.INTERNAL_SERVER_ERROR;
+        let message = '서버 오류가 발생했습니다.';
+
+        if (exception instanceof HttpException) {
+            status = exception.getStatus();
+            const body = exception.getResponse();
+
+            if (typeof body === 'string') {
+                message = body;
+            } else if (body && typeof body === 'object') {
+                const raw = (body as { message?: string | string[] }).message;
+                message = Array.isArray(raw) ? raw.join(', ') : raw || message;
+            }
+        }
 
         res.status(status).json({
             isSuccess: false,
             data: null,
-            message: message,
+            message,
         });
     }
 }

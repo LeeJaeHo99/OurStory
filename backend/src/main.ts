@@ -2,9 +2,10 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { LogInterceptor } from './common/interceptors/LogInterceptor.interceptor.js';
+import { LogInterceptor } from './common/interceptors/Log.interceptor.js';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/httpException.filter.js';
+import { ResponseInterceptor } from './common/interceptors/Response.interceptor.js';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -29,6 +30,7 @@ async function bootstrap() {
     // INTERCEPTOR
     app.useGlobalInterceptors(
         new LogInterceptor(),
+        new ResponseInterceptor(app.get(Reflector)),
         new ClassSerializerInterceptor(app.get(Reflector)),
     );
 
