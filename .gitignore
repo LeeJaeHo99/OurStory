@@ -1,0 +1,14 @@
+.DS_Store
+
+.vscode/*
+.idea/
+
+.env
+.env.*
+
+node_modules/
+
+postgres/
+redis/
+
+TODO.md
