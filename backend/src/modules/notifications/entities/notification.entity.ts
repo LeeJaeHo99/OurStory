@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { User } from "../../users/entities/user.entity.js";
 import { NotificationType } from "../enums/NotificationType.enum.js";
 import { ContentsType } from "../enums/ContentsType.enum.js";
@@ -10,11 +11,11 @@ export class Notification {
 
     @ManyToOne(() => User, (user) => user.notifications)
     @JoinColumn({ name: 'userId' })
-    user!: User;
+    user!: Relation<User>;
 
     @ManyToOne(() => User)
     @JoinColumn({ name: 'senderId' })
-    sender!: User;
+    sender!: Relation<User>;
 
     @CreateDateColumn()
     createdAt!: Date;

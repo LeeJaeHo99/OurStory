@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import type { Relation } from "typeorm";
 import { Base } from "../../../common/entities/Base.entity.js";
 import { User } from "../../users/entities/user.entity.js";
 import { Poem } from "./poem.entity.js";
@@ -7,18 +8,18 @@ import { Poem } from "./poem.entity.js";
 export class PoemComment extends Base{
     @ManyToOne(() => User, (user) => user.poemComments)
     @JoinColumn({ name: 'userId' })
-    user!: User;
+    user!: Relation<User>;
 
     @ManyToOne(() => Poem, (poem) => poem.poemComments)
     @JoinColumn({ name: 'poemId' })
-    poem!: Poem;
+    poem!: Relation<Poem>;
 
     @ManyToOne(() => PoemComment, (comment) => comment.replies, { nullable: true })
     @JoinColumn({ name: 'parentId' })
-    parent!: PoemComment | null;
+    parent!: Relation<PoemComment> | null;
 
     @OneToMany(() => PoemComment, (comment) => comment.parent)
-    replies!: PoemComment[];
+    replies!: Relation<PoemComment>[];
 
     @Column()
     text!: string;

@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Base } from '../../../common/entities/Base.entity.js';
 import { Role } from '../enums/Role.enum.js';
@@ -19,6 +20,7 @@ import { PostComment } from '../../posts/entities/post_comment.entity.js';
 import { PostLike } from '../../posts/entities/post_like.entity.js';
 import { Notification } from '../../notifications/entities/notification.entity.js';
 import { Report } from '../../reports/entities/report.entity.js';
+import { RefreshToken } from '../../auth/entities/refresh_token.entity.js';
 
 @Entity()
 export class User extends Base {
@@ -51,51 +53,54 @@ export class User extends Base {
     @Column({ type: 'enum', enum: Badge, default: Badge.CHICK })
     badge!: Badge;
 
+    @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user)
+    refreshTokens!: Relation<RefreshToken>[];
+
     @OneToMany(() => Book, (book) => book.user)
-    books!: Book[];
+    books!: Relation<Book>[];
 
     @OneToMany(() => BookLike, (bookLike) => bookLike.user)
-    bookLikes!: BookLike[];
+    bookLikes!: Relation<BookLike>[];
 
     @OneToMany(() => BookComment, (bookComment) => bookComment.user)
-    bookComments!: BookComment[];
+    bookComments!: Relation<BookComment>[];
 
     @OneToMany(() => Poem, (poem) => poem.user)
-    poems!: Poem[];
+    poems!: Relation<Poem>[];
 
     @OneToMany(() => PoemLike, (poemLike) => poemLike.user)
-    poemLikes!: PoemLike[];
+    poemLikes!: Relation<PoemLike>[];
 
     @OneToMany(() => PoemComment, (poemComment) => poemComment.user)
-    poemComments!: PoemComment[];
+    poemComments!: Relation<PoemComment>[];
 
     @OneToMany(() => Sentence, (sentence) => sentence.user)
-    sentences!: Sentence[];
+    sentences!: Relation<Sentence>[];
 
     @OneToMany(() => SentenceAgree, (sentenceAgree) => sentenceAgree.sentence)
-    sentenceAgrees!: SentenceAgree[];
+    sentenceAgrees!: Relation<SentenceAgree>[];
 
     @OneToMany(() => SentenceLike, (sentenceLike) => sentenceLike.user)
-    sentenceLikes!: SentenceLike[];
+    sentenceLikes!: Relation<SentenceLike>[];
 
     @OneToMany(() => SentenceComment, (sentenceComment) => sentenceComment.user)
-    sentenceComments!: SentenceComment[];
+    sentenceComments!: Relation<SentenceComment>[];
 
     @OneToMany(() => Post, (post) => post.user)
-    posts!: Post[];
+    posts!: Relation<Post>[];
 
     @OneToMany(() => PostLike, (postLike) => postLike.user)
-    postLikes!: PostLike[];
+    postLikes!: Relation<PostLike>[];
 
     @OneToMany(() => PostComment, (postComment) => postComment.user)
-    postComments!: PostComment[];
+    postComments!: Relation<PostComment>[];
 
     @OneToMany(() => Notification, (notification) => notification.user)
-    notifications!: Notification[];
+    notifications!: Relation<Notification>[];
 
     @OneToMany(() => Report, (report) => report.reporter)
-    reporter!: Report[];
+    reporter!: Relation<Report>[];
 
     @OneToMany(() => Report, (report) => report.reportedUser)
-    reportedUser!: Report[];
+    reportedUser!: Relation<Report>[];
 }

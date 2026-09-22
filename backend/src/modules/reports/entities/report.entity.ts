@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Base } from '../../../common/entities/Base.entity.js';
 import { ReportContentsType } from '../enums/ReportContentsType.enum.js';
 import { ReportType } from '../enums/ReportType.enum.js';
@@ -14,11 +15,11 @@ export class Report extends Base {
 
     @ManyToOne(() => User, (user) => user.reporter)
     @JoinColumn({ name: 'reporterId' })
-    reporter!: User;
+    reporter!: Relation<User>;
     
     @ManyToOne(() => User, (user) => user.reportedUser)
     @JoinColumn({ name: 'reportedUserId' })
-    reportedUser!: User;
+    reportedUser!: Relation<User>;
 
     @Column()
     contentsId!: string;
