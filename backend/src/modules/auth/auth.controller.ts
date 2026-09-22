@@ -5,6 +5,9 @@ import { ConfigService } from '@nestjs/config';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../users/entities/user.entity.js';
 import { GoogleUserPayload } from './types/GoogleUserPayload.type.js';
+import { ApiExcludeEndpoint } from '@nestjs/swagger';
+import { ApiLogout, ApiRefreshToken } from './swagger/auth.swagger.js';
+import { ResponseMessage } from '../../common/decorators/ResponseMessage.decorator.js';
 
 @Controller('auth')
 export class AuthController {
@@ -14,10 +17,12 @@ export class AuthController {
     ) {}
 
     @Get('google')
+    @ApiExcludeEndpoint()
     @UseGuards(AuthGuard('google'))
     googleAuth(){}
-
+    
     @Get('google/callback')
+    @ApiExcludeEndpoint()
     @UseGuards(AuthGuard('google'))
     async googleLogin(
         @Req() req: Request & { user: GoogleUserPayload },
@@ -33,6 +38,8 @@ export class AuthController {
     }
 
     @Post('refresh')
+    @ApiRefreshToken()
+    @ResponseMessage('토큰이 재발급되었습니다.')
     refreshToken(
         @Body('refreshToken') refreshToken: string
     ){
@@ -40,6 +47,8 @@ export class AuthController {
     }
 
     @Post('logout')
+    @ApiLogout()
+    @ResponseMessage('로그아웃되었습니다.')
     async logout(
         @Body('refreshToken') refreshToken: string
     ){
