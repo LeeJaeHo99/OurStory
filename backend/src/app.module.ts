@@ -12,6 +12,7 @@ import { SentencesModule } from './modules/sentences/sentences.module.js';
 import { NotificationsModule } from './modules/notifications/notifications.module.js';
 import { PoemsModule } from './modules/poems/poems.module.js';
 import { RankingsModule } from './modules/rankings/rankings.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
 
 @Module({
     imports: [
@@ -30,7 +31,7 @@ import { RankingsModule } from './modules/rankings/rankings.module.js';
         SentencesModule, 
         NotificationsModule, 
         PoemsModule, 
-        RankingsModule,
+        RankingsModule, AuthModule,
     ],
     controllers: [AppController],
     providers: [AppService],
