@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import type { Relation } from "typeorm";
 import { Base } from "../../../common/entities/Base.entity.js";
 import { User } from "../../users/entities/user.entity.js";
 import { BookLike } from "./book_like.entity.js";
@@ -19,14 +20,14 @@ export class Book extends Base {
 
     @ManyToOne(() => User, (user) => user.books)
     @JoinColumn({ name: 'userId' })
-    user!: User;
+    user!: Relation<User>;
 
     @OneToMany(() => BookLike, (bookLike) => bookLike.book)
-    bookLikes!: BookLike[];
+    bookLikes!: Relation<BookLike>[];
     
     @OneToMany(() => BookComment, (bookComment) => bookComment.book)
-    bookComments!: BookComment[];
+    bookComments!: Relation<BookComment>[];
 
     @OneToMany(() => Sentence, (sentence) => sentence.book)
-    sentences!: Sentence[];
+    sentences!: Relation<Sentence>[];
 }

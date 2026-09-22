@@ -1,5 +1,9 @@
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+
+const currentDir = dirname(fileURLToPath(import.meta.url));
 
 export const getDatabaseConfig = ( configService: ConfigService ): TypeOrmModuleOptions => ({
     type: 'postgres',
@@ -8,6 +12,6 @@ export const getDatabaseConfig = ( configService: ConfigService ): TypeOrmModule
     username: configService.getOrThrow<string>('DB_USERNAME'),
     password: configService.getOrThrow<string>('DB_PASSWORD'),
     database: configService.getOrThrow<string>('DB_DATABASE'),
-    autoLoadEntities: true,
+    entities: [join(currentDir, '..', '**', '*.entity.js')],
     synchronize: configService.get('NODE_ENV') !== 'production',
 });

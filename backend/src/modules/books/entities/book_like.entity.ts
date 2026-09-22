@@ -1,4 +1,5 @@
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
+import type { Relation } from "typeorm";
 import { User } from "../../users/entities/user.entity.js";
 import { Book } from "./book.entity.js";
 
@@ -10,11 +11,11 @@ export class BookLike {
 
     @ManyToOne(() => User, (user) => user.bookLikes)
     @JoinColumn({ name: 'userId' })
-    user!: User;
+    user!: Relation<User>;
 
     @ManyToOne(() => Book, (book) => book.bookLikes)
     @JoinColumn({ name: 'bookId' })
-    book!: Book;
+    book!: Relation<Book>;
 
     @CreateDateColumn()
     createdAt!: Date;
