@@ -7,15 +7,15 @@ import { Book } from "./book.entity.js";
 @Entity()
 export class BookComment extends Base{
     @ManyToOne(() => User, (user) => user.bookComments)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 
     @ManyToOne(() => Book, (book) => book.bookComments)
-    @JoinColumn({ name: 'bookId' })
+    @JoinColumn({ name: 'book_id' })
     book!: Relation<Book>;
 
     @ManyToOne(() => BookComment, (comment) => comment.replies, { nullable: true })
-    @JoinColumn({ name: 'parentId' })
+    @JoinColumn({ name: 'parent_id' })
     parent!: Relation<BookComment> | null;
 
     @OneToMany(() => BookComment, (comment) => comment.parent)

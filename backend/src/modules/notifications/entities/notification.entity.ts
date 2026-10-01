@@ -10,11 +10,11 @@ export class Notification {
     id!: string;
 
     @ManyToOne(() => User, (user) => user.notifications)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 
     @ManyToOne(() => User)
-    @JoinColumn({ name: 'senderId' })
+    @JoinColumn({ name: 'sender_id' })
     sender!: Relation<User>;
 
     @CreateDateColumn()

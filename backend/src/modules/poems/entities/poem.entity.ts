@@ -19,7 +19,7 @@ export class Poem extends Base{
     coverImgUrl!: string | null;
 
     @ManyToOne(() => User, (user) => user.poems)
-    @JoinColumn({name: 'userId'})
+    @JoinColumn({name: 'user_id'})
     user!: Relation<User>;
 
     @OneToMany(() => PoemLike, (poemLike) => poemLike.poem)

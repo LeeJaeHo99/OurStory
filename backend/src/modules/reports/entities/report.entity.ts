@@ -14,11 +14,11 @@ export class Report extends Base {
     reportType!: ReportType;
 
     @ManyToOne(() => User, (user) => user.reporter)
-    @JoinColumn({ name: 'reporterId' })
+    @JoinColumn({ name: 'reporter_id' })
     reporter!: Relation<User>;
     
     @ManyToOne(() => User, (user) => user.reportedUser)
-    @JoinColumn({ name: 'reportedUserId' })
+    @JoinColumn({ name: 'reportedUser_id' })
     reportedUser!: Relation<User>;
 
     @Column()

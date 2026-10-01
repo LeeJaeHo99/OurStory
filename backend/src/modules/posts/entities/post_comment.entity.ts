@@ -7,15 +7,15 @@ import { Post } from "./post.entity.js";
 @Entity()
 export class PostComment extends Base{
     @ManyToOne(() => User, (user) => user.postComments)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 
     @ManyToOne(() => Post, (post) => post.postComments)
-    @JoinColumn({ name: 'postId' })
+    @JoinColumn({ name: 'post_id' })
     post!: Relation<Post>;
 
     @ManyToOne(() => PostComment, (comment) => comment.replies, { nullable: true })
-    @JoinColumn({ name: 'parentId' })
+    @JoinColumn({ name: 'parent_id' })
     parent!: Relation<PostComment> | null;
 
     @OneToMany(() => PostComment, (comment) => comment.parent)

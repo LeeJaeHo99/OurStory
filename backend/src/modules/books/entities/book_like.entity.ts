@@ -10,11 +10,11 @@ export class BookLike {
     id!: string;
 
     @ManyToOne(() => User, (user) => user.bookLikes)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 
     @ManyToOne(() => Book, (book) => book.bookLikes)
-    @JoinColumn({ name: 'bookId' })
+    @JoinColumn({ name: 'book_id' })
     book!: Relation<Book>;
 
     @CreateDateColumn()

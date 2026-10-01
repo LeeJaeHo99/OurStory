@@ -9,11 +9,11 @@ export class SentenceLike {
     id!: string;
 
     @ManyToOne(() => User, (user) => user.sentenceLikes)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 
     @ManyToOne(() => Sentence, (sentence) => sentence.sentenceLikes)
-    @JoinColumn({ name: 'sentenceId' })
+    @JoinColumn({ name: 'sentence_id' })
     sentence!: Relation<Sentence>;
 
     @CreateDateColumn()

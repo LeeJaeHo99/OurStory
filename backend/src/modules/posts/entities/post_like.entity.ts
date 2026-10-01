@@ -8,10 +8,10 @@ import { Post } from "./post.entity.js";
 @Unique(['user', 'post'])
 export class PostLike extends Base{
     @ManyToOne(() => User, (user) => user.postLikes)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
     
     @ManyToOne(() => Post, (post) => post.postLikes)
-    @JoinColumn({ name: 'postId' })
+    @JoinColumn({ name: 'post_id' })
     post!: Relation<Post>;
 }

@@ -14,15 +14,15 @@ export class Sentence extends Base{
     text!: string;
 
     @ManyToOne(() => User, (user) => user.sentences)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
     
     @ManyToOne(() => Book, (book) => book.sentences, { nullable: true })
-    @JoinColumn({ name: 'bookId' })
+    @JoinColumn({ name: 'book_id' })
     book!: Relation<Book> | null;
     
     @ManyToOne(() => Poem, (poem) => poem.sentences, { nullable: true })
-    @JoinColumn({ name: 'poemId' })
+    @JoinColumn({ name: 'poem_id' })
     poem!: Relation<Poem> | null;
     
     @OneToMany(() => SentenceAgree, (sentenceAgree) => sentenceAgree.sentence)

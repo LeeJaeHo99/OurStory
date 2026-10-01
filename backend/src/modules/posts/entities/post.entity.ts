@@ -9,7 +9,7 @@ import { PostComment } from "./post_comment.entity.js";
 @Entity()
 export class Post extends Base{
     @ManyToOne(() => User, (user) => user.posts)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 
     @Column({ type: 'text', array: true, nullable: true })

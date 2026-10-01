@@ -8,10 +8,10 @@ import { User } from "../../users/entities/user.entity.js";
 @Unique(['user', 'sentence'])
 export class SentenceAgree extends Base{
     @ManyToOne(() => Sentence, (sentence) => sentence.sentenceAgrees)
-    @JoinColumn({ name: 'sentenceId' })
+    @JoinColumn({ name: 'sentence_id' })
     sentence!: Relation<Sentence>;
 
     @ManyToOne(() => User, (user) => user.sentenceAgrees)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 }

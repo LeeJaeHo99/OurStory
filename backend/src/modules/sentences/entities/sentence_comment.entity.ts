@@ -7,15 +7,15 @@ import { Sentence } from "./sentence.entity.js";
 @Entity()
 export class SentenceComment extends Base{
     @ManyToOne(() => User, (user) => user.sentenceComments)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     user!: Relation<User>;
 
     @ManyToOne(() => Sentence, (sentence) => sentence.sentenceComments)
-    @JoinColumn({ name: 'sentenceId' })
+    @JoinColumn({ name: 'sentence_id' })
     sentence!: Relation<Sentence>;
 
     @ManyToOne(() => SentenceComment, (comment) => comment.replies, { nullable: true })
-    @JoinColumn({ name: 'parentId' })
+    @JoinColumn({ name: 'parent_id' })
     parent!: Relation<SentenceComment> | null;
 
     @OneToMany(() => SentenceComment, (comment) => comment.parent)
