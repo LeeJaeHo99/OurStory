@@ -18,7 +18,6 @@ export class Report extends Base {
     reporter!: Relation<User>;
     
     @ManyToOne(() => User, (user) => user.reportedUser)
-    @JoinColumn({ name: 'reportedUser_id' })
     reportedUser!: Relation<User>;
 
     @Column()
